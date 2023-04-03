@@ -1,38 +1,169 @@
-.App {
-  text-align: center;
+.background{
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+.wrongMsg{
+  color: red;
+  font-weight: bold;
+}
+.Login{
+  position: absolute;
+  top: 25%;
+  left: 40%;
+  background-color: white;
+  padding: 30px 50px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  vertical-align: text-top;
+}
+.LoginButton{
+  width: 100%;
+  background-color: seagreen;
+  color: white;
+  border: 1px solid seagreen;
+  padding: 5px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.SidebarItem{
+  list-style-type: none;text-decoration: none;color:white;display: inline;padding: 20px; font-weight: bold;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Side{
+  background-color: seagreen;height: 50px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+ol,ul{
+  padding-left: 0 !important;
+}
+#Right{
+ float: right;
+  padding: 5px 10px !important;
+  margin-right: 30px;
+  margin-top: 10px;
+}
+.Arrow{
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.SidebarItem:hover{
+  opacity: 0.5;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.List{
+  position: absolute;
+  top: 48px;
+  right: 30px;
+  border: 1px solid grey;
+  z-index: 100;
+}
+.listItem{
+  list-style-type: none;
+  text-decoration: none;
+  float: left;
+  padding: 10px;
+  color: black;
+  margin: 0;
+  width: 100%;
+  background-color: white;
+}.listItem:hover{
+  background-color: seagreen;
+  color: white;
+  text-decoration: none;
+}
+i{margin: 3px;}
+ table{
+  border:1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+.Table{
+  border:1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+.deleteButton{
+  background-color: red;
+  margin: 5px;
+  height: 35px;
+  width: 35px;
+  font-size: 16px;
+  border:0;
+}
+.editButton{
+  background-color: green;
+  height: 35px;
+  width: 35px;
+  color: white;
+  border:0;
+}
+.Add{
+  float: right;
+  margin: 10px;
+  margin-right: 0;
+  background-color: seagreen;
+  color: white;
+}
+.upload{
+  margin: 10px;
+  margin-right: 0;
+  background-color: seagreen;
+  color: white;
+}
+.SearchButton{
+  float: right;
+  margin: 10px;
+  margin-left: 0;
+  background-color: seagreen;
+  color: white;
+}
+.search{
+  margin: 10px;
+  width: 75%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.body{
+  margin: 5px;
+}
+
+/* Slideshow */
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slide {
+  display: inline-block;
+  height: 400px;
+  width: 100%;
+}
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 3000ms;
+}
+/* Buttons */
+.slideshowDots {
+  text-align: center;
+}
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 15px 7px 0px;
+  background-color: #c4c4c4;
+}
+.slideshowDot.active {
+  background-color: seagreen;
+}
+@media screen and (max-width: 1000px){
+.search{
+  width: auto;
+}
 }

@@ -2,12 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Students from './screen/student';
 import reportWebVitals from './reportWebVitals';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from './screen/dashboard';
+import Incomes from './screen/incomes';
+import Outcomes from './screen/outcomes';
+import Curriculum from './screen/curriculum';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+  <Routes>
+  <Route path="/" element={<App />}/>
+  <Route path="/students" element={<Students />}/>
+  <Route exact path="/dashboard" element={<Dashboard />}  />
+  <Route exact path="/incomes" element={<Incomes />}  />
+  <Route exact path="/outcomes" element={<Outcomes />}  />
+  <Route exact path="/curriculum" element={<Curriculum />}  />
+  </Routes>
+</BrowserRouter>
   </React.StrictMode>
 );
 
