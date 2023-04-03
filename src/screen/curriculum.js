@@ -21,17 +21,18 @@ export default function Curriculum() {
   const [showEdit, setShowEdit] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [state,setState]=useState(0)
+  const [search, setSearch] = useState("");
+  const [filtered, setFiltered] = useState([]);
   const handleFileInputChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
   const handleDelete = () => {
     setShowDialog(false);
-    // deleteIncome({ _id: id });
+    deleteFile({id:id})
   };
   const handleClose = () => {
     setShowDialog(false);
     setShowEdit(false);
-    deleteFile({id})
   };
   const handleEdit = () => {
     setShowDialog(false);
@@ -43,19 +44,20 @@ export default function Curriculum() {
     uploadFile({selectedFile,subject,sectionId})
   };
   useEffect( () => {
+    searchFor()
     getSections().then((response) => {
         setSections(response.msg);
       });
     fetchFiles().then((response) => {
         setFiles(response.data);
-        console.log(files)
-      })},[state,showDialog,showEdit] );
+        setFiltered(response.data.msg)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      })},[state, showDialog, showEdit] );
 
   const handleDownload = (id,name) => {
     fetchFile({id}).then((response)=>{
         setFile(response)
     })
-    console.log(id)
     const a = document.createElement('a');
     a.href = file;
     a.download = name;
@@ -63,11 +65,19 @@ export default function Curriculum() {
     a.click();
     document.body.removeChild(a);
   };
-
-
+  const searchFor=()=>{
+    if(search!==''){
+      const data= files.msg.filter((item) => {
+        return JSON.stringify(item).toLowerCase().includes(search.toLowerCase())
+    })
+    setFiltered(data)
+    }else{
+      setFiltered(files.msg)
+    }
+  }
   return (
     <div >
-      <Sidebar /><br/>
+      <Sidebar />
       <div className="body">
       {showEdit ? (
         <Dialog open={showEdit} onClose={handleClose}>
@@ -79,7 +89,8 @@ export default function Curriculum() {
       </label>
       <select style={{ margin: "10px"}}
         key="section"
-        value={section}
+        value={sectionId}
+        
         onChange={(e) => {
           setSectionId(sections[e.target.options.selectedIndex]._id);
           setSection(e.target.value);
@@ -106,7 +117,15 @@ export default function Curriculum() {
         </Dialog>
       ) : null}
     <AddCurriculum state={state} setState={setState}/>
-
+    <input
+        type="text"
+        className="search"
+        onChange={(e) =>{ setSearch(e.target.value);}}
+        style={{ float: "left" }}
+      />
+      <button className="SearchButton" onClick={()=>{searchFor()}}>
+        search
+      </button><br/><br/>
       <table className="studentTable" style={{ width: "100%" }}>
         <thead>
           <tr>
@@ -118,7 +137,7 @@ export default function Curriculum() {
           </tr>
         </thead>
         <tbody>
-        {files.msg? files.msg.map((f)=>{
+        {filtered? filtered.map((f)=>{
            return <tr>
             <td className="Table">{f.name}</td>
             <td className="Table">{f.subject}</td>
@@ -127,6 +146,7 @@ export default function Curriculum() {
             <td className="Table" key={f._id}>
                       <button
                         onClick={() => {
+                          console.log(f._id)
                           setId(f._id);
                           setShowDialog(true);
                         }}
@@ -139,7 +159,6 @@ export default function Curriculum() {
                           setId(f._id);
                           setSectionId(f.sectionId)
                           setSection(f.section[0].title)
-                          console.log(section)
                           setShowEdit(true);
                           setSubject(f.subject)
                         }}
@@ -149,7 +168,6 @@ export default function Curriculum() {
                       </button>
                     </td>                   
             </tr>  }):null}
-
             </tbody></table>
            
    </div> </div>

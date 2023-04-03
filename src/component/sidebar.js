@@ -11,6 +11,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import logo from '../images/logo.jpg'
 import DialogTitle from '@mui/material/DialogTitle';
+import { addSection } from '../method/section';
 export default function Sidebar({token}){
     const [named,setNamed]=useState('')
     const [email,setEmail]=useState('')
@@ -25,7 +26,9 @@ export default function Sidebar({token}){
     const [showDialog,setShowDialog]=useState(false)
     const [showDialogProfile,setShowDialogProfile]=useState(false)
     const[visible,setVisible]=useState('none')
-    
+    const [showDialogSection,setShowDialogSection]=useState(false)
+    const [title,setTitle]=useState('')
+    const [description,setDescription]=useState('')
    useEffect(()=>{
     getUser(window.token).then(
       async (response)=>{
@@ -39,23 +42,33 @@ export default function Sidebar({token}){
    },[])
   const handleTryAdd=()=>{
     setOpen(false);
+    setShowDialogSection(false)
     setShowDialog(true)
 
 }
   const handleAdd=()=>{
     setShowDialog(false);
+    setShowDialogSection(false)
     Add(named,mobile,email,password,window.token)
   }
   const handleEdit=()=>{
     setShowDialogProfile(false);
+    setShowDialogSection(false)
     Edit(name,mobileA,emailA,passwordA,window.token)
   }
     const handleClose = () => {
       setOpen(false);
+      setShowDialogSection(false)
       setShowDialog(false)
       setShowDialogProfile(false)
     };
-
+    const handleAddSection=()=>{
+      setOpen(false);
+      setShowDialogSection(false)
+      setShowDialog(false)
+      setShowDialogProfile(false)
+      addSection({title:title,description:description})
+    }
     return(
         <div className='Side'> 
         {open?  <Dialog open={open} onClose={handleClose}>
@@ -113,7 +126,37 @@ export default function Sidebar({token}){
           <Button onClick={handleTryAdd}>Add</Button>
         </DialogActions>
       </Dialog>: null}
-
+      {showDialogSection?  <Dialog open={showDialogSection} onClose={handleClose}>
+        <DialogTitle>Add a New Section</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="title"
+            label="Title"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={title}
+            onChange={(e)=>setTitle(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="description"
+            label="Description"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={description}
+            onChange={(e)=>setDescription(e.target.value)}
+          /> 
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleAddSection}>Add</Button>
+        </DialogActions>
+      </Dialog>: null}
       {showDialog?<Dialog open={showDialog} onClose={handleClose}>
         <DialogTitle>Confirm Addtion</DialogTitle>
         <DialogContent>
@@ -165,7 +208,8 @@ export default function Sidebar({token}){
                 
             <div className='List' style={{display:`${visible}`}}>
                 <ul >
-                    <li className='listItem' onClick={()=>setOpen(true)}>new Admin</li><br/>
+                <li className='listItem' onClick={()=>setOpen(true)}>new Admin</li><br/>
+                <li className='listItem' onClick={()=>setShowDialogSection(true)}>new Section</li><br/>
                     <li className='listItem' onClick={()=>setShowDialogProfile(true)}>Profile</li><br/>
                     <li className='listItem'><a style={{color:'black',textDecoration:'none'}} href='/' >log out</a></li><br/>
                 </ul>

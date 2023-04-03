@@ -25,7 +25,6 @@ export const uploadFile = async ({selectedFile,subject,sectionId}) => {
  export const fetchFiles=async()=>{
     return await axios.get('http://localhost:5000/curriculum/getFiles' )
     .then((data) => {
-     console.log(data)
       return data
     })
     .catch((err) => {
