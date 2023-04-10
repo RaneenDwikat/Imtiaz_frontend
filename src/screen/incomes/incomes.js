@@ -59,7 +59,7 @@ export default function IncomeTable({ state, setState }) {
    
   }
   return (
-    <div className="body">
+    <div>
       {showEdit ? (
         <Dialog open={showEdit} onClose={handleClose}>
           <DialogTitle>Edit Income</DialogTitle>

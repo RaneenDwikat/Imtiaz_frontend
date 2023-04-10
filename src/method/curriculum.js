@@ -32,10 +32,16 @@ export const uploadFile = async ({selectedFile,subject,sectionId}) => {
     });
  }
  export const fetchFile=async({id})=>{
-   const response= await axios.get(`http://localhost:5000/curriculum/download/${id}` ,{ responseType: 'blob' }).catch((err) => {
-        console.log(err.message);
-     });
-    return URL.createObjectURL(response.data);
+
+   return await axios.get(`http://localhost:5000/curriculum/download/${id}` 
+   ,{ responseType: 'blob',headers: {
+      'authorization': localStorage.getItem('token')
+   }, }).then((res)=>{
+         return res
+   }).catch((err) => {
+      console.log(err.message);
+   });
+     
  }
  export const updateFile = async ({subject,sectionId,id}) => {
     return await fetch(`http://localhost:5000/curriculum/update/${id}`, {
@@ -46,7 +52,7 @@ export const uploadFile = async ({selectedFile,subject,sectionId}) => {
        }),
        headers: {
           'Content-type': 'application/json; charset=UTF-8',
-          'authorization': window.token
+          'authorization': localStorage.getItem('token')
        },
     })
        .then((response) => response.json())
@@ -62,7 +68,7 @@ export const uploadFile = async ({selectedFile,subject,sectionId}) => {
        method: 'DELETE',
        headers: {
           'Content-type': 'application/json; charset=UTF-8',
-          'authorization': window.token
+          'authorization': localStorage.getItem('token')
        },
     })
        .then((response) => response.json())
@@ -73,3 +79,12 @@ export const uploadFile = async ({selectedFile,subject,sectionId}) => {
           console.log(err.message);
        });
  };
+ export const fetchFilesBySection=async(sectionId)=>{
+   return await axios.get(`http://localhost:5000/curriculum/getFiles/${sectionId}` )
+   .then((data) => {
+     return data
+   })
+   .catch((err) => {
+      console.log(err.message);
+   });
+}

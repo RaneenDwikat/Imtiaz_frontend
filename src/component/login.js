@@ -17,9 +17,13 @@ export default function Login(){
             <button className='LoginButton' onClick={async ()=>{login(email,password).then((response)=>{
                console.log(response)
                if(response.success){
-                    window.responseGolobalVar=response
-                    window.token=response.token
-                  navigate(`/dashboard`,{state:{response:response}})
+                localStorage.setItem('token', response.token);
+                localStorage.setItem('response', response);
+                if(response.role==='teacher'){
+                    navigate(`/teacherDashboard`,{state:{response:response}})
+                 }else{
+                    navigate(`/dashboard`,{state:{response:response}})
+                 }
                }else{
                   setRes('wrong password or email')
                }

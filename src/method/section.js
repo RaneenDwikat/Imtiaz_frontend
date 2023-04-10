@@ -23,7 +23,7 @@ export const getSections = async () => {
       }),
       headers: {
          'Content-type': 'application/json; charset=UTF-8',
-         'authorization': window.token
+         'authorization': localStorage.getItem('token')
       },
    })
       .then((response) => response.json())

@@ -8,7 +8,7 @@ export const addIncome = async ({studentId,amount,note}) => {
        }),
        headers: {
           'Content-type': 'application/json; charset=UTF-8',
-          'authorization': window.token
+          'authorization':localStorage.getItem('token')
        },
     })
        .then((response) => response.json())
@@ -29,7 +29,7 @@ export const addIncome = async ({studentId,amount,note}) => {
        }),
        headers: {
           'Content-type': 'application/json; charset=UTF-8',
-          'authorization': window.token
+          'authorization': localStorage.getItem('token')
        },
     })
        .then((response) => response.json())
@@ -45,7 +45,7 @@ export const addIncome = async ({studentId,amount,note}) => {
        method: 'GET',
        headers: {
           'Content-type': 'application/json; charset=UTF-8',
-          'authorization': window.token
+          'authorization': localStorage.getItem('token')
        },
     })
        .then((response) => response.json())
@@ -61,7 +61,7 @@ export const addIncome = async ({studentId,amount,note}) => {
        method: 'DELETE',
        headers: {
           'Content-type': 'application/json; charset=UTF-8',
-          'authorization': window.token
+          'authorization': localStorage.getItem('token')
        },
     })
        .then((response) => response.json())

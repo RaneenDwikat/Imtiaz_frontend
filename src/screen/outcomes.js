@@ -7,7 +7,8 @@ export default function Outcomes(){
 const [state,setState]=useState(0)
 return(<div>
     <Sidebar />
+    <div className="body">
     <AddOutcomes state={state} setState={setState} />
-    <OutcomeTable state={state} setState={setState}/>
+    <OutcomeTable state={state} setState={setState}/></div>
 </div>);
 }

@@ -79,7 +79,7 @@ export const deactivateStudent = async ({_id}) => {
       method: 'PUT',
       headers: {
          'Content-type': 'application/json; charset=UTF-8',
-         'authorization': window.token
+         'authorization': localStorage.getItem('token')
       },
    })
       .then((response) => response.json())
@@ -106,7 +106,7 @@ export const updateStudent = async ({_id,name,motherMobile,fatherMobile,monthlyE
       }),
       headers: {
          'Content-type': 'application/json; charset=UTF-8',
-         'authorization': window.token
+         'authorization': localStorage.getItem('token')
       },
    })
       .then((response) => response.json())
@@ -132,7 +132,23 @@ export const addStudent = async ({name,motherMobile,fatherMobile,monthlyEarning,
       }),
       headers: {
          'Content-type': 'application/json; charset=UTF-8',
-         'authorization': window.token
+         'authorization': localStorage.getItem('token')
+      },
+   })
+      .then((response) => response.json())
+      .then((data) => {
+        return data
+      })
+      .catch((err) => {
+         console.log(err.message);
+      });
+};
+export const getStudentBySection = async ({section}) => {
+   return await fetch(`http://localhost:5000/student/getBySection/${section}`, {
+      method: 'GET',
+      headers: {
+         'Content-type': 'application/json; charset=UTF-8',
+         
       },
    })
       .then((response) => response.json())

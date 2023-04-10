@@ -9,6 +9,9 @@ import Dashboard from './screen/dashboard';
 import Incomes from './screen/incomes';
 import Outcomes from './screen/outcomes';
 import Curriculum from './screen/curriculum';
+import Teachers from './screen/teacher';
+import TeacherDashboard from './Teacher/dashboard';
+import TeacherCurriculum from './Teacher/curriculum';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -21,6 +24,9 @@ root.render(
   <Route exact path="/incomes" element={<Incomes />}  />
   <Route exact path="/outcomes" element={<Outcomes />}  />
   <Route exact path="/curriculum" element={<Curriculum />}  />
+  <Route exact path="/teacher" element={<Teachers />}  />
+  <Route exact path="/teacherDashboard" element={<TeacherDashboard />}  />
+  <Route exact path="/teacherCurriculum" element={<TeacherCurriculum />}  />
   </Routes>
 </BrowserRouter>
   </React.StrictMode>

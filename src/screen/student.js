@@ -7,7 +7,8 @@ export default function Students(){
 const [state,setState]=useState(0)
 return(<div>
     <Sidebar />
+    <div className="body">
     <AddStudent state={state} setState={setState} />
-    <StudentTable state={state} setState={setState}/>
+    <StudentTable state={state} setState={setState}/></div>
 </div>);
 }

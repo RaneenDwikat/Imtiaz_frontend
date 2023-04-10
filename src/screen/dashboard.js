@@ -68,8 +68,8 @@ export default function Dashboard() {
 //   const location = useLocation();
 //   let response = location.state.response;
   return (
-    <div className="body">
-      <Sidebar token={window.token} />
+    <div>
+      <Sidebar token={localStorage.getItem('token')} />
       <Slideshow/>
       <Main />
     </div>

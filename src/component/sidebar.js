@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react'
-import { Add, getUser,Edit } from '../method/user'
+import { getUser,Edit, AddAdmin } from '../method/user'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,7 @@ export default function Sidebar({token}){
     const [title,setTitle]=useState('')
     const [description,setDescription]=useState('')
    useEffect(()=>{
-    getUser(window.token).then(
+    getUser(localStorage.getItem('token')).then(
       async (response)=>{
         setName(response.data.name)
         setEmailA(response.data.email)
@@ -49,12 +49,12 @@ export default function Sidebar({token}){
   const handleAdd=()=>{
     setShowDialog(false);
     setShowDialogSection(false)
-    Add(named,mobile,email,password,window.token)
+    AddAdmin(named,mobile,email,password,localStorage.getItem('token'))
   }
   const handleEdit=()=>{
     setShowDialogProfile(false);
     setShowDialogSection(false)
-    Edit(name,mobileA,emailA,passwordA,window.token)
+    Edit(name,mobileA,emailA,passwordA,localStorage.getItem('token'))
   }
     const handleClose = () => {
       setOpen(false);
@@ -196,6 +196,7 @@ export default function Sidebar({token}){
             <li className='SidebarItem' onClick={()=> navigate(`/incomes`,{state:{token:token}})}>Incomes</li>
             <li className='SidebarItem' onClick={()=> navigate(`/outcomes`,{state:{token:token}})}>Outcomes</li>
             <li className='SidebarItem' onClick={()=> navigate(`/curriculum`,{state:{token:token}})}>Curriculum</li>
+            <li className='SidebarItem' onClick={()=> navigate(`/teacher`,{state:{token:token}})}>Teachers</li>
             <li className='SidebarItem' id='Right' onClick={()=>{
                   console.log(visible)
                   if(visible==='inline'){

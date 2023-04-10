@@ -7,7 +7,8 @@ export default function Incomes(){
 const [state,setState]=useState(0)
 return(<div>
     <Sidebar />
+    <div className="body">
     <AddIncomes state={state} setState={setState} />
-    <IncomeTable state={state} setState={setState}/>
+    <IncomeTable state={state} setState={setState}/></div>
 </div>);
 }

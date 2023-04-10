@@ -74,7 +74,7 @@ export default function StudentTable({state,setState}) {
    
   }
   return (
-    <div className="body">
+    <div>
      
       {showEdit ? (
         <Dialog open={showEdit} onClose={handleClose}>

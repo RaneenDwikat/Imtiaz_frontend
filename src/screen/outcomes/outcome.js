@@ -51,7 +51,7 @@ export default function OutcomeTable({ state, setState }) {
    
   }
   return (
-    <div className="body">
+    <div>
       {showEdit ? (
         <Dialog open={showEdit} onClose={handleClose}>
           <DialogTitle>Edit Outcome</DialogTitle>
